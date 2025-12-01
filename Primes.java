@@ -31,7 +31,7 @@ public class Primes {
             }
         }
 
-        int average = primeCount * 100 / (n - 1);
+        int average = primeCount * 100 / n;
         System.out.println("There are " + primeCount + " primes between 2 and " + args[0] + " (" + average + "% are primes)");
 
     }
