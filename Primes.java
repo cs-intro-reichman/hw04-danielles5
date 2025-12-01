@@ -24,6 +24,7 @@ public class Primes {
         // prints the prime numbers in given array
         int primeCount = 0;
 
+        System.out.println("Prime numbers up to " + n + ":");
         for (int x = 0; x <= n; x++) {
             if (primeCheck[x] == true) {
                 primeCount++;
