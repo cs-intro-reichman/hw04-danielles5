@@ -21,6 +21,88 @@ public class KeywordsDetector {
     // Iterates through all the sentences.
     // If a sentence contains one or more of the kewords, prints it.
     public static void detectAndPrint(String[] sentences, String[] keywords) {
-        // Replace this comment with your code
+        String[] lowerSentence = new String[sentences.length];
+        String[] lowerKey = new String[keywords.length];
+
+        // Turns our sentence into lowercase, first iterates through words
+        for (int i = 0; i < sentences.length; i++) {
+            // Initialize lowercase array
+            lowerSentence[i] = "";
+
+            // For each word, turns all characters into lowercase
+            for (int j = 0; j < sentences[i].length(); j++) {
+                
+                char letter = sentences[i].charAt(j);
+
+                // If uppercase, converts to lowercase (otherwise stays same)
+                if (letter >= 'A' && letter <= 'Z') {
+                    letter = (char)(letter + 32);
+                }
+                // Adds the lowercase letter to the word in the new lowercase array
+                lowerSentence[i] += letter;
+                }
+        }
+
+        // Turns our keywords into lowercase, first iterates through words
+        for (int i = 0; i < keywords.length; i++) {
+            // Initialize lowercase array
+            lowerKey[i] = "";
+
+            // For each word, turns all characters into lowercase
+            for (int j = 0; j < keywords[i].length(); j++) {
+                
+                char letter = keywords[i].charAt(j);
+
+                // If uppercase, converts to lowercase (otherwise stays same)
+                if (letter >= 'A' && letter <= 'Z') {
+                    letter = (char)(letter + 32);
+                }
+                // Adds the lowercase letter to the word in the new lowercase array
+                lowerKey[i] += letter;
+                }
+        }
+
+        // For each sentence
+        for (int i = 0; i < lowerSentence.length; i++) {
+            String sentenceWord = lowerSentence[i];
+            boolean sentenceHasKeyword = false;
+    
+            // For each keyword
+            for (int j = 0; j < lowerKey.length && !sentenceHasKeyword; j++) {
+                
+                String keyword = lowerKey[j];
+    
+                // Try each starting index in this sentence
+                for (int start = 0; start <= sentenceWord.length() - keyword.length(); start++) {
+    
+                    // First letter matches?
+                    if (sentenceWord.charAt(start) == keyword.charAt(0)) {
+    
+                        boolean fullMatch = true;
+    
+                        // Check the rest of the letters
+                        for (int k = 1; k < keyword.length(); k++) {
+                            if (sentenceWord.charAt(start + k) != keyword.charAt(k)) {
+                                fullMatch = false;
+                                break;
+                            }
+                        }
+    
+                        if (fullMatch) {
+                            sentenceHasKeyword = true;
+                            break; // stop checking more start positions for this keyword
+                        }
+                    }
+                }
+            }
+    
+            if (sentenceHasKeyword) {
+                // Print original sentence (with original capitalization)
+                System.out.println(sentences[i]);
+            }
+        }
+    
+
+
     }
 }
